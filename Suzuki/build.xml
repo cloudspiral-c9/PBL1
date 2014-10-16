@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<project>
+
+	<!-- 各メンバー固有のプロパティファイルの読み込み -->
+	<import file="build-common.xml" />
+
+	<!-- 実年利用時間 1st -->
+		<target name="run.TimezoneCountByAge1" depends="prepare">
+			<sshexec host="${ssh.server}" username="${ssh.user}" keyfile="${ssh.key}" trust="yes"
+				command="hadoop jar main.jar posmining.time.TimezoneCountByAge1 s3://cspiral-posdata/"
+			/>
+		</target>
+
+	<!-- 実年利用時間 2st -->
+			<target name="run.TimezoneCountByAge2" depends="prepare">
+				<sshexec host="${ssh.server}" username="${ssh.user}" keyfile="${ssh.key}" trust="yes"
+					command="hadoop jar main.jar posmining.time.TimezoneCountByAge2 /user/hadoop/out/timezoneCountByAge1"
+				/>
+			</target>
+
+	<!-- 実年の種類別分布  1st-->
+		<target name="run.kindCountByAge1" depends="prepare">
+			<sshexec host="${ssh.server}" username="${ssh.user}" keyfile="${ssh.key}" trust="yes"
+				command="hadoop jar main.jar posmining.kind.kindCountByAge1 s3://cspiral-posdata/"
+			/>
+		</target>
+
+	<!-- 実年の種類別分布  2st-->
+			<target name="run.kindCountByAge2" depends="prepare">
+				<sshexec host="${ssh.server}" username="${ssh.user}" keyfile="${ssh.key}" trust="yes"
+					command="hadoop jar main.jar posmining.kind.kindCountByAge2 /user/hadoop/out/kindCountByAge1"
+				/>
+			</target>
+
+	<!-- クラスタ実行のための準備タスク．プロジェクトをビルドしてJARに固めてSCPで送信する -->
+	<target name="prepare">
+
+		<mkdir dir="${build.path}" />
+
+		<path id="build.class.path">
+			<fileset dir="${hadoop.path}">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="${hadoop.lib.path}">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+
+		<javac encoding="utf-8"
+			srcdir="src"
+			destdir="${build.path}"
+			compiler="javac1.7"
+			includeantruntime="false"
+			debug="true">
+			<classpath refid="build.class.path" />
+		</javac>
+
+		<jar basedir="${build.path}" destfile="main.jar"/>
+
+		<scp file="main.jar"
+			todir="${ssh.user}:${ssh.pass}@${ssh.server}:~/."
+			keyfile="${ssh.key}"
+			trust = "yes" />
+	</target>
+
+</project>
