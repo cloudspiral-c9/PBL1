@@ -1,4 +1,4 @@
-package pbl1;
+﻿package pbl1;
 
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ import posmining.utils.CSKV;
 import posmining.utils.PosUtils;
 
 /**
- * 性別のコンドームの金額(売り上げ)を出力する
+ * 性別のコンドームの金額(売り上げ)を出力する: add comment
  * @author thuy
  *
  */

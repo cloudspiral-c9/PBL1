@@ -1,4 +1,4 @@
-package pbl1;
+﻿package pbl1;
 
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ import posmining.utils.CSKV;
 import posmining.utils.PosUtils;
 
 /**
- * 酒-種類別の個数を出力する
+ * 酒-種類別の個数を出力する:add comment
  * @author thuy
  *
  */
