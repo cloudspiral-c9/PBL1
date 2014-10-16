@@ -1,4 +1,4 @@
-
+﻿
 package pbl1;
 
 
@@ -20,7 +20,7 @@ import posmining.utils.CSKV;
 import posmining.utils.PosUtils;
 
 /**
- * 性別のコンドームの個数を出力する
+ * 性別のコンドームの個数を出力する : add comment
  * @author thuy
  *
  */
