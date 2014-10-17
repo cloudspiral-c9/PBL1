@@ -23,7 +23,7 @@ import posmining.utils.CSKV;
 import posmining.utils.PosUtils;
 
 /**
- * 時間帯別の栄養補給ドリンクの金額(売り上げ)を出力する
+ * 時間帯別の栄養補給ドリンクの金額(売り上げ)を出力する: add comments
  * @author thuy
  *
  */
